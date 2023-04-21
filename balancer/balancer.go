@@ -20,11 +20,11 @@ type Balancer interface {
 // and the factory design pattern is used here
 type Factory func([]string) Balancer
 
-var fatories = make(map[string]Factory)
+var factories = make(map[string]Factory)
 
 // Build generates teh corresponding Balancer according to the algorithm
 func Build(algorithm string, hosts []string) (Balancer, error) {
-	factory, ok := fatories[algorithm]
+	factory, ok := factories[algorithm]
 	if !ok {
 		return nil, AlgorithmNotSupportedError
 	}
