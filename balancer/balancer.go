@@ -3,8 +3,8 @@ package balancer
 import "errors"
 
 var (
-	NoHostError                = errors.New("no host")
-	AlgorithmNotSupportedError = errors.New("algorithm not supported")
+	ErrorNoHost                = errors.New("no host")
+	ErrorAlgorithmNotSupported = errors.New("algorithm not supported")
 )
 
 // Balancer iterface is the load balancer for the reverse proxy
@@ -26,7 +26,7 @@ var factories = make(map[string]Factory)
 func Build(algorithm string, hosts []string) (Balancer, error) {
 	factory, ok := factories[algorithm]
 	if !ok {
-		return nil, AlgorithmNotSupportedError
+		return nil, ErrorAlgorithmNotSupported
 	}
 	return factory(hosts), nil
 }

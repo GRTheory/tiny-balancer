@@ -24,7 +24,7 @@ func (r *RoundRobin) Balance(_ string) (string, error) {
 	r.RLock()
 	defer r.RUnlock()
 	if len(r.hosts) == 0 {
-		return "", NoHostError
+		return "", ErrorNoHost
 	}
 	host := r.hosts[r.i%uint64(len(r.hosts))]
 	r.i++
